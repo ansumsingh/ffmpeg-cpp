@@ -29,7 +29,7 @@ SET(CMAKE_CXX_FLAGS_RELEASE "-O3 -g -ggdb -DNDEBUG")
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/ffmpeg/include)
 LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/ffmpeg/lib)
 
-include_directories(ffmpeg-cpp)
+include_directories(source/ffmpeg-cpp/ffmpeg-cpp)
 
 file(GLOB_RECURSE ffmpeg-cpp-srcs source/ffmpeg-cpp/*.cpp *.h)
 
