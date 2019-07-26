@@ -3,10 +3,6 @@
 #include "ffmpeg.h"
 #include "ConvertedAudioProcessor.h"
 
-#ifndef nullptr
-#define nullptr NULL
-#endif
-
 namespace ffmpegcpp
 {
 	class AudioFormatConverter
