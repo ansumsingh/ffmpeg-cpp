@@ -26,12 +26,12 @@ set (CXX_FLAGS
 SET(CMAKE_CXX_FLAGS_DEBUG   "-O0 -g -ggdb -D_DEBUG")
 SET(CMAKE_CXX_FLAGS_RELEASE "-O3 -g -ggdb -DNDEBUG")
 
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../../ffmpeg/include)
-LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../../ffmpeg/lib)
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/ffmpeg/include)
+LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/ffmpeg/lib)
 
 include_directories(ffmpeg-cpp)
 
-file(GLOB_RECURSE ffmpeg-cpp-srcs ffmpeg-cpp/*.cpp *.h)
+file(GLOB_RECURSE ffmpeg-cpp-srcs source/ffmpeg-cpp/*.cpp *.h)
 
 add_library(ffmpeg-cpp ${ffmpeg-cpp-srcs})
 target_link_libraries(ffmpeg-cpp avcodec avdevice avfilter avformat avutil postproc swresample swscale)
