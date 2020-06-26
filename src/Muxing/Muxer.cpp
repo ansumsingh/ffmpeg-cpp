@@ -9,23 +9,26 @@ using namespace std;
 namespace ffmpegcpp
 {
 
-	Muxer::Muxer(const char* fileName)
+	Muxer::Muxer(const string& url)
 	{
-		this->fileName = fileName;
+		this->fileName = url;
 
 		/* allocate the output media context */
-		avformat_alloc_output_context2(&containerContext, NULL, NULL, fileName);
-		if (!containerContext)
+		containerContext = avformat_alloc_context();
+		containerFormat = av_guess_format(nullptr, url.c_str(), nullptr);
+		if (!containerFormat)
 		{
 			printf("WARNING: Could not deduce output format from file extension: using MP4. as default\n");
-			avformat_alloc_output_context2(&containerContext, NULL, "mp4", fileName);
+			containerFormat = av_guess_format(nullptr, nullptr, "video/mp4");
 		}
 		if (!containerContext)
 		{
 			throw FFmpegException("Could not allocate container context for " + this->fileName);
 		}
+		containerContext->oformat = containerFormat;
+		containerContext->iformat = nullptr;
 
-		// the format of the container - not necessarily the same as the fileName suggests, see above
+		// the format of the container - not necessarily the same as the uri suggests, see above
 		containerFormat = containerContext->oformat;
 	}
 

@@ -2,24 +2,6 @@ cmake_minimum_required(VERSION 3.5)
 project(ffmpeg-cpp)
 
 set(CMAKE_CXX_STANDARD 11)
-set (CXX_FLAGS
-        -Wall
-        -Wno-unused-parameter
-        -Wno-unused-function
-        -Wunused-variable
-        -Wunused-value
-        -Wshadow
-        -Wcast-qual
-        -Wcast-align
-        -Wwrite-strings
-        -Wsign-compare
-        -Winvalid-pch
-        -fms-extensions
-        -Wfloat-equal
-        -Wextra
-        )
-set(CMAKE_CXX_FLAGS_DEBUG   "-D_DEBUG")
-set(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG")
 
 file(GLOB_RECURSE ffmpeg-cpp-sources ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h)
 
