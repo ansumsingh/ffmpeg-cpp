@@ -1,6 +1,6 @@
 REM install packages in vcpkg
 
-pushd vendor\vcpkg
+pushd dependencies\vcpkg
 
 IF NOT EXIST vcpkg.exe bootstrap-vcpkg.bat 
 
