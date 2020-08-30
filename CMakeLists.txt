@@ -5,13 +5,12 @@ find_package(FFMPEG REQUIRED)
 
 set(CMAKE_CXX_STANDARD 17)
 
-file(GLOB_RECURSE ffmpeg-cpp-sources ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h)
+file(GLOB_RECURSE ffmpeg-cpp-sources ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
+set(FFMPEG_CPP_INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-include_directories(${FFMPEG_INCLUDE_DIRS})
 add_library(ffmpeg-cpp ${ffmpeg-cpp-sources})
-#target_link_directories(ffmpeg-cpp PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ffmpeg/lib)
 target_link_libraries(ffmpeg-cpp PUBLIC ${FFMPEG_LIBRARIES})
-target_include_directories(ffmpeg-cpp PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(ffmpeg-cpp PUBLIC ${FFMPEG_INCLUDE_DIRS} ${FFMPEG_CPP_INCLUDE})
 
 option(BUILD_EXAMPLES "Build example projects." FALSE)
 
