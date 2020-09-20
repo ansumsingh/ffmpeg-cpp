@@ -74,3 +74,9 @@ I developed this project to be able to to integrate FFmpeg into our program with
 This library is licensed under LGPL (https://en.wikipedia.org/wiki/GNU_Lesser_General_Public_License).
 
 Please note though that FFmpeg, which you will need to build this library, is not. Depending on how you build it, it is either LGPL or GPL. So once you use the LGPL-version of FFmpeg in your project, this library will be GPL too.
+
+# TODO
+- Make a folder test
+- Make a folder test/unittests
+- Start writing unittests
+	- Start with FrameContainer unittest
