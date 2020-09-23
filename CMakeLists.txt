@@ -24,4 +24,5 @@ target_include_directories(ffmpeg-cpp PUBLIC ${FFMPEG_INCLUDE_DIRS} )
 option(BUILD_EXAMPLES "Build example projects." FALSE)
 
 add_subdirectory("examples")
+add_subdirectory("test")
 
