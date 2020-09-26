@@ -4,11 +4,11 @@ using namespace std;
 
 namespace ffmpegcpp
 {
-	FFmpegException::FFmpegException(string error)
+	FFmpegException::FFmpegException(const string& error) : errorInfo{error}
 	{
 	}
 
-	FFmpegException::FFmpegException(string error, int returnValue)
+	FFmpegException::FFmpegException(const string& error, int returnValue)
 	{
 	}
 }
