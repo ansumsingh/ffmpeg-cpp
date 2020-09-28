@@ -25,6 +25,28 @@ TEST_CASE("FrameContainer()")
 	  auto frame = dummyAvFrame();
 	  REQUIRE_NOTHROW(ffmpegcpp::FrameContainer(frame, new AVRational{}));
   }
+
+  SECTION("~FrameContainer()")
+  {	  
+	  AVFrame* frame;
+	  {
+		  auto frameContainer = ffmpegcpp::FrameContainer{dummyAvFrame(), new AVRational{}};
+		  frame = frameContainer.GetFrame();
+		  REQUIRE(frame);
+	  }
+	  REQUIRE(frame->height == 1080);
+  }
+}
+
+TEST_CASE("~FrameContainer()")
+{
+  REQUIRE_THROWS_AS(ffmpegcpp::FrameContainer(new AVFrame{}, new AVRational{}), ffmpegcpp::FFmpegException);
+
+  SECTION("Construct without throw")
+  {	  
+	  auto frame = dummyAvFrame();
+	  REQUIRE_NOTHROW(ffmpegcpp::FrameContainer(frame, new AVRational{}));
+  }
 }
 
 TEST_CASE("FrameContainer::getFrame()")
