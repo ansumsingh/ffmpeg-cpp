@@ -7,6 +7,6 @@ IF NOT EXIST vcpkg.exe bootstrap-vcpkg.bat
 
 vcpkg.exe integrate install
 
-vcpkg.exe install ffmpeg --triplet x64-windows
+vcpkg.exe install ffmpeg catch2 --triplet x64-windows
 
 popd

@@ -6,23 +6,23 @@
 
 namespace ffmpegcpp
 {
-	class FFmpegException : std::exception
+	class FFmpegException : public std::exception
 	{
 
 	public:
 
-		FFmpegException(std::string error);
+		FFmpegException(const std::string& error);
 
-		FFmpegException(std::string error, int returnValue);
+		FFmpegException(const std::string& error, int returnValue);
 
-		virtual char const* what() throw()
+		virtual char const* what()
 		{
-			return std::exception::what();
+			return errorInfo.data();
 		}
 
 
 	private:
 
-		char error[AV_ERROR_MAX_STRING_SIZE];
+		std::string errorInfo;
 	};
 }
