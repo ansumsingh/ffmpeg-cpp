@@ -8,6 +8,7 @@ set(CMAKE_CXX_STANDARD 17)
 file(GLOB_RECURSE ffmpeg-cpp-sources ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp ${CMAKE_CURRENT_SOURCE_DIR}/include/*.cpp)
 # appending all the folders so that visual studio can pick up.
 list(APPEND FFMPEG_CPP_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include 
+                                    ${CMAKE_CURRENT_SOURCE_DIR}/include/Frames 
                                     ${CMAKE_CURRENT_SOURCE_DIR}/include/Codecs 
                                     ${CMAKE_CURRENT_SOURCE_DIR}/include/Demuxing 
                                     ${CMAKE_CURRENT_SOURCE_DIR}/include/Info 
