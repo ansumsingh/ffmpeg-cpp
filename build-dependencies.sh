@@ -12,6 +12,6 @@ fi
 
 ./vcpkg integrate install
 
-./vcpkg install ffmpeg catch2
+./vcpkg install ffmpeg catch2 --triplet x64-linux
 
 popd
