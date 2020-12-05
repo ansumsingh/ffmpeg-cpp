@@ -8,9 +8,7 @@ then
     ./bootstrap-vcpkg.sh
 fi
 
-./vcpkg update
 
-./vcpkg integrate install
 
 ./vcpkg install ffmpeg catch2 --triplet x64-linux
 

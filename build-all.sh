@@ -15,6 +15,5 @@ popd
 if [ "${script}" != "" ]
 then
     echo "executing ${script}"
-    docker run --rm -v "${PWD}":/workspace -w /workspace ${DOCKER_IMAGE_TAG} /workspace/${script}
-    #docker run --rm -v "${PWD}":/workspace -t ${DOCKER_IMAGE_TAG} /workspace/$(script)
+    docker run --rm -u $(id -u):$(id -g) -v "${PWD}":/workspace -w /workspace ${DOCKER_IMAGE_TAG} /workspace/${script} $2
 fi

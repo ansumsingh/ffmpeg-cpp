@@ -19,8 +19,10 @@ list(APPEND FFMPEG_CPP_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
 include_directories(${FFMPEG_CPP_INCLUDE_DIRS})
 
 add_library(ffmpeg-cpp ${ffmpeg-cpp-sources})
-target_link_libraries(ffmpeg-cpp PUBLIC ${FFMPEG_LIBRARIES})
+
 target_include_directories(ffmpeg-cpp PUBLIC ${FFMPEG_INCLUDE_DIRS} )
+
+target_link_libraries(ffmpeg-cpp PUBLIC ${FFMPEG_LIBRARIES})
 
 option(BUILD_EXAMPLES "Build example projects." FALSE)
 
