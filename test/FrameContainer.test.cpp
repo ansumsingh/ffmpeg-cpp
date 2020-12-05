@@ -32,9 +32,13 @@ TEST_CASE("FrameContainer()")
 	  {
 		  auto frameContainer = ffmpegcpp::FrameContainer{dummyAvFrame(), new AVRational{}};
 		  frame = frameContainer.GetFrame();
+
 		  REQUIRE(frame);
+	  	  REQUIRE(frame->height == 1080);
+	  	  REQUIRE(frame->width == 1092);
 	  }
-	  REQUIRE(frame->height == 1080);
+	  REQUIRE(frame->height == 0);
+	  REQUIRE(frame->width == 0);
   }
 }
 
@@ -58,6 +62,16 @@ TEST_CASE("FrameContainer::getFrame()")
 	REQUIRE(avFrame->width == 1092);
 	REQUIRE(avFrame->height == 1080);
 	REQUIRE(avFrame->format == AVPixelFormat::AV_PIX_FMT_BGR4);
+}
+
+TEST_CASE("FrameContainer::getTimeBase()")
+{
+	auto frame = dummyAvFrame();
+	auto timeBase = AVRational{1, 1};
+	auto frameContainer = ffmpegcpp::FrameContainer{ frame, &timeBase };
+	
+	REQUIRE(frameContainer.GetTimeBase()->num == 1);
+	REQUIRE(frameContainer.GetTimeBase()->den == 1);
 }
 
 }//ffmpegcpp::unittests
