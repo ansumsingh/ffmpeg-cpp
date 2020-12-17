@@ -1,3 +1,4 @@
+#include "common.hpp"
 #include "FrameContainer.h"
 #include "FFmpegException.h"
 #include <catch2/catch.hpp>
@@ -34,8 +35,8 @@ TEST_CASE("FrameContainer()")
 		  frame = frameContainer.GetFrame();
 
 		  REQUIRE(frame);
-	  	  REQUIRE(frame->height == 1080);
-	  	  REQUIRE(frame->width == 1092);
+	  	  REQUIRE(frame->height == ffmpegcpp::unittests::commonHeight);
+	  	  REQUIRE(frame->width == ffmpegcpp::unittests::commonWidth);
 	  }
 	  REQUIRE(frame->height == 0);
 	  REQUIRE(frame->width == 0);
@@ -59,8 +60,8 @@ TEST_CASE("FrameContainer::getFrame()")
 	auto frameContainer = ffmpegcpp::FrameContainer{ frame, new AVRational{} };
 	auto avFrame = frameContainer.GetFrame();
 	
-	REQUIRE(avFrame->width == 1092);
-	REQUIRE(avFrame->height == 1080);
+	REQUIRE(avFrame->width == ffmpegcpp::unittests::commonWidth);
+	REQUIRE(avFrame->height == ffmpegcpp::unittests::commonHeight);
 	REQUIRE(avFrame->format == AVPixelFormat::AV_PIX_FMT_BGR4);
 }
 
