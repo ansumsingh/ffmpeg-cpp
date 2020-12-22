@@ -18,6 +18,10 @@ class Rational{
         int denominator() const;
 
         double toDouble() const;
+
+        // Comparator operators
+        friend bool operator==(const Rational& input1, const Rational& input2);
+        friend bool operator!=(const Rational& input1, const Rational& input2);
     
     private:
         std::unique_ptr<AVRational> data_;

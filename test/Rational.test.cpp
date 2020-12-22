@@ -110,4 +110,34 @@ namespace ffmpegcpp::unittests{
             REQUIRE(std::isnan(rational.toDouble()));
         }
     }
+
+    TEST_CASE("operator==(..., ...) && operator!=(..., ...)")
+    {
+        using namespace ffmpegcpp;
+        SECTION("RationalA == RationalB")
+        {
+            auto [rationalA, rationalB] = GENERATE(
+                std::pair{Rational{}, Rational{2, 2}},
+                std::pair{Rational{0, 1}, Rational{0, 3}},
+                std::pair{Rational{1, 2}, Rational{2, 4}},
+                std::pair{Rational{2, 4}, Rational{3, 6}}
+                );
+            
+            REQUIRE(rationalA == rationalB);
+            REQUIRE_FALSE(rationalA != rationalB);
+        }
+
+        SECTION("RationalA != RationalB)")
+        {
+            auto [rationalA, rationalB] = GENERATE(
+                std::pair{Rational{}, Rational{1, 2}},
+                std::pair{Rational{0, 1}, Rational{1, 1}},
+                std::pair{Rational{1, 2}, Rational{2, 5}},
+                std::pair{Rational{2, 4}, Rational{3, 7}}
+                );
+            
+            REQUIRE_FALSE(rationalA == rationalB);
+            REQUIRE(rationalA != rationalB);
+        }
+    }
 }

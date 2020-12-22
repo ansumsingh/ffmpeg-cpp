@@ -46,3 +46,13 @@ double ffmpegcpp::Rational::toDouble() const
 {
     return av_q2d(*data_);
 }
+
+bool ffmpegcpp::operator==(const ffmpegcpp::Rational& inputA, const ffmpegcpp::Rational& inputB)
+{
+    return av_cmp_q(*inputA.data_, *inputB.data_) == 0;
+}
+
+bool ffmpegcpp::operator!=(const ffmpegcpp::Rational& inputA, const ffmpegcpp::Rational& inputB)
+{
+    return !(inputA == inputB);
+}
