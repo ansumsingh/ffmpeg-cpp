@@ -41,3 +41,8 @@ int ffmpegcpp::Rational::denominator() const
 {
     return data_->den;
 }
+
+double ffmpegcpp::Rational::toDouble() const
+{
+    return av_q2d(*data_);
+}

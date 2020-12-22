@@ -1,5 +1,8 @@
 #include "common.hpp"
 #include "Rational.h"
+
+#include <cmath>
+#include <limits>
 #include <catch2/catch.hpp>
 
 namespace{
@@ -80,6 +83,31 @@ namespace ffmpegcpp::unittests{
 
             REQUIRE(rationalCopy.numerator() == 2);
             REQUIRE(rationalCopy.denominator() == 3);
+        }
+    }
+
+    TEST_CASE("toDouble()")
+    {
+        using namespace ffmpegcpp;
+        auto [expected, rational] = GENERATE(
+            std::pair{1.0, Rational{}},
+            std::pair{0.0, Rational{0, 1}},
+            std::pair{0.0, Rational{0, 2}},
+            std::pair{0.0, Rational{0, 4}},
+            std::pair{0.5, Rational{1, 2}},
+            std::pair{0.5, Rational{2, 4}},
+            std::pair{0.5, Rational{3, 6}},
+            std::pair{std::numeric_limits<double>::infinity(), Rational{1, 0}},
+            std::pair{-std::numeric_limits<double>::infinity(), Rational{-1, 0}}
+        );
+
+        REQUIRE(rational.toDouble() == expected);
+
+        SECTION("toDouble() => NaN")
+        {
+            auto rational = Rational(0,0);
+
+            REQUIRE(std::isnan(rational.toDouble()));
         }
     }
 }

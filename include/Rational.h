@@ -17,7 +17,7 @@ class Rational{
         int numerator() const;
         int denominator() const;
 
-        double toDouble();
+        double toDouble() const;
     
     private:
         std::unique_ptr<AVRational> data_;
