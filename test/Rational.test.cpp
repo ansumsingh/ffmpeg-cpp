@@ -173,4 +173,64 @@ namespace ffmpegcpp::unittests{
             REQUIRE_FALSE(rationalA > rationalB);
         }
     }
+
+    TEST_CASE("operator+(lhs, rhs)")
+    {
+        auto [expected, lhs, rhs] = GENERATE(
+                std::tuple{Rational{3, 1}, Rational{}, Rational{2, 1}},
+                std::tuple{Rational{1, 3}, Rational{0, 1}, Rational{1, 3}},
+                std::tuple{Rational{5, 4}, Rational{1, 2}, Rational{3, 4}},
+                std::tuple{Rational{1, 1}, Rational{2, 4}, Rational{1, 2}},
+                std::tuple{Rational{0, 1}, Rational{2, 4}, Rational{-1, 2}}
+                );
+        auto result = lhs + rhs;
+
+        REQUIRE(result.numerator() == expected.numerator());
+        REQUIRE(result.denominator() == expected.denominator());
+    }
+
+    TEST_CASE("operator-(lhs, rhs)")
+    {
+        auto [expected, lhs, rhs] = GENERATE(
+                std::tuple{Rational{-1, 1}, Rational{}, Rational{2, 1}},
+                std::tuple{Rational{-1, 3}, Rational{0, 1}, Rational{1, 3}},
+                std::tuple{Rational{-1, 4}, Rational{1, 2}, Rational{3, 4}},
+                std::tuple{Rational{0, 1}, Rational{2, 4}, Rational{1, 2}},
+                std::tuple{Rational{1, 1}, Rational{2, 4}, Rational{-1, 2}}
+                );
+        auto result = lhs - rhs;
+
+        REQUIRE(result.numerator() == expected.numerator());
+        REQUIRE(result.denominator() == expected.denominator());
+    }
+
+    TEST_CASE("operator*(lhs, rhs)")
+    {
+        auto [expected, lhs, rhs] = GENERATE(
+                std::tuple{Rational{2, 1}, Rational{}, Rational{2, 1}},
+                std::tuple{Rational{0, 1}, Rational{0, 1}, Rational{1, 3}},
+                std::tuple{Rational{3, 8}, Rational{1, 2}, Rational{3, 4}},
+                std::tuple{Rational{1, 4}, Rational{2, 4}, Rational{1, 2}},
+                std::tuple{Rational{-1, 4}, Rational{2, 4}, Rational{-1, 2}}
+                );
+        auto result = lhs * rhs;
+
+        REQUIRE(result.numerator() == expected.numerator());
+        REQUIRE(result.denominator() == expected.denominator());
+    }
+
+    TEST_CASE("operator/(lhs, rhs)")
+    {
+        auto [expected, lhs, rhs] = GENERATE(
+                std::tuple{Rational{1, 2}, Rational{}, Rational{2, 1}},
+                std::tuple{Rational{0, 1}, Rational{0, 1}, Rational{1, 3}},
+                std::tuple{Rational{2, 3}, Rational{1, 2}, Rational{3, 4}},
+                std::tuple{Rational{1, 1}, Rational{2, 4}, Rational{1, 2}},
+                std::tuple{Rational{-1, 1}, Rational{2, 4}, Rational{-1, 2}}
+                );
+        auto result = lhs / rhs;
+
+        REQUIRE(result.numerator() == expected.numerator());
+        REQUIRE(result.denominator() == expected.denominator());
+    }
 }

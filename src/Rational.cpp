@@ -83,3 +83,31 @@ bool ffmpegcpp::operator>=(const ffmpegcpp::Rational& lhs, const ffmpegcpp::Rati
     return !(lhs < rhs);
 }
 
+/// Returns lhs + rhs.
+ffmpegcpp::Rational ffmpegcpp::operator+(const ffmpegcpp::Rational& lhs, const ffmpegcpp::Rational& rhs)
+{
+    auto rational = av_add_q(*lhs.data_, *rhs.data_);
+    return Rational{rational.num, rational.den};
+}
+
+/// Returns lhs - rhs.
+ffmpegcpp::Rational ffmpegcpp::operator-(const ffmpegcpp::Rational& lhs, const ffmpegcpp::Rational& rhs)
+{
+    auto rational = av_sub_q(*lhs.data_, *rhs.data_);
+    return Rational{rational.num, rational.den};
+}
+
+/// Returns lhs x rhs.
+ffmpegcpp::Rational ffmpegcpp::operator*(const ffmpegcpp::Rational& lhs, const ffmpegcpp::Rational& rhs)
+{
+    auto rational = av_mul_q(*lhs.data_, *rhs.data_);
+    return Rational{rational.num, rational.den};
+}
+
+/// Returns lhs / rhs.
+ffmpegcpp::Rational ffmpegcpp::operator/(const ffmpegcpp::Rational& lhs, const ffmpegcpp::Rational& rhs)
+{
+    auto rational = av_div_q(*lhs.data_, *rhs.data_);
+    return Rational{rational.num, rational.den};
+}
+
