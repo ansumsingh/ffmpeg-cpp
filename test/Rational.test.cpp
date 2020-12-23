@@ -174,7 +174,7 @@ namespace ffmpegcpp::unittests{
         }
     }
 
-    TEST_CASE("operator+(lhs, rhs)")
+    TEST_CASE("operator+(lhs, rhs)&& operator+=(..)")
     {
         auto [expected, lhs, rhs] = GENERATE(
                 std::tuple{Rational{3, 1}, Rational{}, Rational{2, 1}},
@@ -187,9 +187,14 @@ namespace ffmpegcpp::unittests{
 
         REQUIRE(result.numerator() == expected.numerator());
         REQUIRE(result.denominator() == expected.denominator());
+
+        lhs += rhs;
+
+        REQUIRE(lhs.numerator() == expected.numerator());
+        REQUIRE(lhs.denominator() == expected.denominator());
     }
 
-    TEST_CASE("operator-(lhs, rhs)")
+    TEST_CASE("operator-(lhs, rhs) && operator-=(...)")
     {
         auto [expected, lhs, rhs] = GENERATE(
                 std::tuple{Rational{-1, 1}, Rational{}, Rational{2, 1}},
@@ -202,6 +207,11 @@ namespace ffmpegcpp::unittests{
 
         REQUIRE(result.numerator() == expected.numerator());
         REQUIRE(result.denominator() == expected.denominator());
+
+        lhs -= rhs;
+
+        REQUIRE(lhs.numerator() == expected.numerator());
+        REQUIRE(lhs.denominator() == expected.denominator());
     }
 
     TEST_CASE("operator*(lhs, rhs)")
@@ -217,6 +227,11 @@ namespace ffmpegcpp::unittests{
 
         REQUIRE(result.numerator() == expected.numerator());
         REQUIRE(result.denominator() == expected.denominator());
+
+        lhs *= rhs;
+
+        REQUIRE(lhs.numerator() == expected.numerator());
+        REQUIRE(lhs.denominator() == expected.denominator());
     }
 
     TEST_CASE("operator/(lhs, rhs)")
@@ -232,5 +247,10 @@ namespace ffmpegcpp::unittests{
 
         REQUIRE(result.numerator() == expected.numerator());
         REQUIRE(result.denominator() == expected.denominator());
+
+        lhs /= rhs;
+
+        REQUIRE(lhs.numerator() == expected.numerator());
+        REQUIRE(lhs.denominator() == expected.denominator());
     }
 }

@@ -90,11 +90,25 @@ ffmpegcpp::Rational ffmpegcpp::operator+(const ffmpegcpp::Rational& lhs, const f
     return Rational{rational.num, rational.den};
 }
 
+/// Returns lhs = lhs + rhs.
+ffmpegcpp::Rational& ffmpegcpp::Rational::operator+=(const ffmpegcpp::Rational& rhs)
+{
+    *this = *this + rhs;
+    return *this;
+}
+
 /// Returns lhs - rhs.
 ffmpegcpp::Rational ffmpegcpp::operator-(const ffmpegcpp::Rational& lhs, const ffmpegcpp::Rational& rhs)
 {
     auto rational = av_sub_q(*lhs.data_, *rhs.data_);
     return Rational{rational.num, rational.den};
+}
+
+/// Returns lhs = lhs - rhs.
+ffmpegcpp::Rational& ffmpegcpp::Rational::operator-=(const ffmpegcpp::Rational& rhs)
+{
+    *this = *this - rhs;
+    return *this;
 }
 
 /// Returns lhs x rhs.
@@ -104,6 +118,13 @@ ffmpegcpp::Rational ffmpegcpp::operator*(const ffmpegcpp::Rational& lhs, const f
     return Rational{rational.num, rational.den};
 }
 
+/// Returns lhs = lhs * rhs.
+ffmpegcpp::Rational& ffmpegcpp::Rational::operator*=(const ffmpegcpp::Rational& rhs)
+{
+    *this = *this * rhs;
+    return *this;
+}
+
 /// Returns lhs / rhs.
 ffmpegcpp::Rational ffmpegcpp::operator/(const ffmpegcpp::Rational& lhs, const ffmpegcpp::Rational& rhs)
 {
@@ -111,3 +132,9 @@ ffmpegcpp::Rational ffmpegcpp::operator/(const ffmpegcpp::Rational& lhs, const f
     return Rational{rational.num, rational.den};
 }
 
+/// Returns lhs = lhs / rhs.
+ffmpegcpp::Rational& ffmpegcpp::Rational::operator/=(const ffmpegcpp::Rational& rhs)
+{
+    *this = *this / rhs;
+    return *this;
+}
