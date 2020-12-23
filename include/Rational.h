@@ -19,13 +19,19 @@ class Rational{
 
         double toDouble() const;
 
-        // Operators
-        friend bool operator==(const Rational& inputA, const Rational& inputB);
-        friend bool operator!=(const Rational& inputA, const Rational& inputB);
-        friend bool operator>(const Rational& inputA, const Rational& inputB);
-        friend bool operator>=(const Rational& inputA, const Rational& inputB);
-        friend bool operator<(const Rational& inputA, const Rational& inputB);
-        friend bool operator<=(const Rational& inputA, const Rational& inputB);
+        // Comparison Operators
+        friend bool operator==(const Rational& lhs, const Rational& rhs);
+        friend bool operator!=(const Rational& lhs, const Rational& rhs);
+        friend bool operator>(const Rational& lhs, const Rational& rhs);
+        friend bool operator>=(const Rational& lhs, const Rational& rhs);
+        friend bool operator<(const Rational& lhs, const Rational& rhs);
+        friend bool operator<=(const Rational& lhs, const Rational& rhs);
+
+        /// Arithematic operators
+        friend Rational operator+(const Rational& lhs, const Rational& rhs);
+        friend Rational operator-(const Rational& lhs, const Rational& rhs);
+        friend Rational operator*(const Rational& lhs, const Rational& rhs);
+        friend Rational operator/(const Rational& lhs, const Rational& rhs);
     
     private:
         std::unique_ptr<AVRational> data_;

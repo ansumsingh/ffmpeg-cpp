@@ -47,39 +47,39 @@ double ffmpegcpp::Rational::toDouble() const
     return av_q2d(*data_);
 }
 
-/// Returns true if inputA == inputB. Behaviour is undefined if one of the input is 0/0.
-bool ffmpegcpp::operator==(const ffmpegcpp::Rational& inputA, const ffmpegcpp::Rational& inputB)
+/// Returns true if lhs == rhs. Behaviour is undefined if one of the input is 0/0.
+bool ffmpegcpp::operator==(const ffmpegcpp::Rational& lhs, const ffmpegcpp::Rational& rhs)
 {
-    return av_cmp_q(*inputA.data_, *inputB.data_) == 0;
+    return av_cmp_q(*lhs.data_, *rhs.data_) == 0;
 }
 
-/// Returns true if inputA != inputB. Behaviour is undefined if one of the input is 0/0.
-bool ffmpegcpp::operator!=(const ffmpegcpp::Rational& inputA, const ffmpegcpp::Rational& inputB)
+/// Returns true if lhs != rhs. Behaviour is undefined if one of the input is 0/0.
+bool ffmpegcpp::operator!=(const ffmpegcpp::Rational& lhs, const ffmpegcpp::Rational& rhs)
 {
-    return !(inputA == inputB);
+    return !(lhs == rhs);
 }
 
-/// Return true if inputA > inputB. Behaviour is undefined if one of the input is 0/0.
-bool ffmpegcpp::operator>(const ffmpegcpp::Rational& inputA, const ffmpegcpp::Rational& inputB)
+/// Return true if lhs > rhs. Behaviour is undefined if one of the input is 0/0.
+bool ffmpegcpp::operator>(const ffmpegcpp::Rational& lhs, const ffmpegcpp::Rational& rhs)
 {
-    return av_cmp_q(*inputA.data_, *inputB.data_) > 0;
+    return av_cmp_q(*lhs.data_, *rhs.data_) > 0;
 }
 
-/// Return true if inputA <= inputB. Behaviour is undefined if one of the input is 0/0.
-bool ffmpegcpp::operator<=(const ffmpegcpp::Rational& inputA, const ffmpegcpp::Rational& inputB)
+/// Return true if lhs <= rhs. Behaviour is undefined if one of the input is 0/0.
+bool ffmpegcpp::operator<=(const ffmpegcpp::Rational& lhs, const ffmpegcpp::Rational& rhs)
 {
-    return !(inputA > inputB);
+    return !(lhs > rhs);
 }
 
-/// Return true if inputA < inputB. Behaviour is undefined if one of the input is 0/0.
-bool ffmpegcpp::operator<(const ffmpegcpp::Rational& inputA, const ffmpegcpp::Rational& inputB)
+/// Return true if lhs < rhs. Behaviour is undefined if one of the input is 0/0.
+bool ffmpegcpp::operator<(const ffmpegcpp::Rational& lhs, const ffmpegcpp::Rational& rhs)
 {
-    return av_cmp_q(*inputA.data_, *inputB.data_) < 0;
+    return av_cmp_q(*lhs.data_, *rhs.data_) < 0;
 }
 
-/// Return true if inputA >= inputB. Behaviour is undefined if one of the input is 0/0.
-bool ffmpegcpp::operator>=(const ffmpegcpp::Rational& inputA, const ffmpegcpp::Rational& inputB)
+/// Return true if lhs >= rhs. Behaviour is undefined if one of the input is 0/0.
+bool ffmpegcpp::operator>=(const ffmpegcpp::Rational& lhs, const ffmpegcpp::Rational& rhs)
 {
-    return !(inputA < inputB);
+    return !(lhs < rhs);
 }
 
