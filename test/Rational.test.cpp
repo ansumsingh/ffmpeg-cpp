@@ -140,4 +140,37 @@ namespace ffmpegcpp::unittests{
             REQUIRE(rationalA != rationalB);
         }
     }
+    
+    TEST_CASE("operator<(..., ...), operator>(..., ...), operator>=(..., ...)")
+    {
+        using namespace ffmpegcpp;
+        SECTION("A < B")
+        {
+            auto [rationalA, rationalB] = GENERATE(
+                std::pair{Rational{}, Rational{2, 1}},
+                std::pair{Rational{0, 1}, Rational{1, 3}},
+                std::pair{Rational{1, 2}, Rational{3, 4}},
+                std::pair{Rational{2, 4}, Rational{3, 5}}
+                );
+            
+            REQUIRE(rationalA < rationalB);
+            REQUIRE(rationalB > rationalA);
+            REQUIRE_FALSE(rationalA > rationalB);
+            REQUIRE_FALSE(rationalA >= rationalB);
+        }
+
+        SECTION("A <= B")
+        {
+            auto [rationalA, rationalB] = GENERATE(
+                std::pair{Rational{}, Rational{2, 1}},
+                std::pair{Rational{0, 1}, Rational{1, 3}},
+                std::pair{Rational{1, 2}, Rational{3, 4}},
+                std::pair{Rational{2, 4}, Rational{1, 2}}
+                );
+            
+            REQUIRE(rationalA <= rationalB);
+            REQUIRE(rationalB >= rationalA);
+            REQUIRE_FALSE(rationalA > rationalB);
+        }
+    }
 }
