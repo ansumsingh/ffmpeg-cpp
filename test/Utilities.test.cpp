@@ -14,5 +14,6 @@ namespace ffmpegcpp::unittests{
             );
         
         REQUIRE(ffmpegcpp::toMediaType(input) == expected);
+        REQUIRE(ffmpegcpp::toMediaType(static_cast<AVMediaType>(100)) == MediaType::UNKNOWN);
     }
 }
