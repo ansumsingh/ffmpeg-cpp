@@ -17,6 +17,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: update submodule vcpkg
+      working-directory: ${{runner.workspace}}/ffmpeg-cpp
+      run: git submodule update --init
+
+
     - name: Build Dependencies
       shell: bash
       working-directory: ${{runner.workspace}}/ffmpeg-cpp
