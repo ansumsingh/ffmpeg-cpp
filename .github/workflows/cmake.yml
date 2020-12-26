@@ -19,7 +19,7 @@ jobs:
       with:
         submodule: true
     - name: Dependencies
-        uses: lukka/run-vcpkg@v2
+        uses: lukka/run-vcpkg@v6
         id: runvcpkg
         with:
           vcpkgArguments: zlib:x64-linux openssl:x64-linux mbedtls:x64-linux
