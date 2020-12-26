@@ -18,8 +18,8 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodule: true
-    - name: Dependencies
-        uses: lukka/run-vcpkg@v6
+    - name: run-vcpkg
+        uses: lukka/run-vcpkg@v6.0
         id: runvcpkg
         with:
           vcpkgArguments: zlib:x64-linux openssl:x64-linux mbedtls:x64-linux
