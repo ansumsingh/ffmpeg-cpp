@@ -8,7 +8,7 @@ fi
 
 echo BUILD_EXAMPLES_FLAG="${BUILD_EXAMPLES_FLAG}"
 
-cmake -s . -B build -DBUILD_EXAMPLES=${BUILD_EXAMPLES_FLAG} -DCMAKE_TOOLCHAIN_FILE=../dependencies/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=Debug
+cmake -s . -B build -DBUILD_EXAMPLES=${BUILD_EXAMPLES_FLAG} -DCMAKE_TOOLCHAIN_FILE=${PWD}/dependencies/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=Debug
 
 cmake --build build
 
