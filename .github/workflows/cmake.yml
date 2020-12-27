@@ -13,7 +13,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: true
-    - name: ffmpeg-dependencies
+    - name: Install dependencies for ffmpeg
       run: |
         sudo apt update && sudo apt install -y g++ \
           curl \
@@ -26,7 +26,7 @@ jobs:
           libpthread-stubs0-dev \
           cmake
   
-    - name: run-vcpkg
+    - name: Build dependencies
       uses: lukka/run-vcpkg@v6.0
       id: runvcpkg
       with:
@@ -35,7 +35,7 @@ jobs:
         vcpkgTriplet: x64-linux
         appendedCacheKey: 'vcpkg-dependencies'
     
-    - name: Run CMake with Ninja
+    - name: Build Library
       uses: lukka/run-cmake@v3
       id: runcmake
       with:
@@ -44,7 +44,7 @@ jobs:
         buildDirectory: '${{ github.workspace }}/build'
         buildWithCMakeArgs: '-- -v'
 
-    - name: Run Test
+    - name: Run Unittests Test
       run: |
         pushd build
         ctest -V
