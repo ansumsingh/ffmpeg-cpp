@@ -27,5 +27,6 @@ target_link_libraries(ffmpeg-cpp PUBLIC ${FFMPEG_LIBRARIES})
 option(BUILD_EXAMPLES "Build example projects." FALSE)
 
 add_subdirectory("examples")
+enable_testing()
 add_subdirectory("test")
 
