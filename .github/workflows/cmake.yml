@@ -46,9 +46,11 @@ jobs:
       with:
         cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
         useVcpkgToolchainFile: true
+        buildDirectory: '${{ github.workspace }}/build'
         buildWithCMakeArgs: '-- -v'
-    - name: Test with build dir
-      run: ls test
+
+    - name: Run Test
+      run: ./build/test/ffmpegcpp-tests
     # - name: update submodule vcpkg
     #   working-directory: ${{runner.workspace}}/ffmpeg-cpp
     #   run: git submodule update --init
