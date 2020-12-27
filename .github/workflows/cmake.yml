@@ -23,7 +23,7 @@ jobs:
       id: runvcpkg
       with:
         vcpkgArguments: ffmpeg:x64-linux catch2:x64-linux 
-        vcpkgDirectory: ${{ runner.workspace }}/dependencies/vcpkg/
+        vcpkgDirectory: ${{ runner.workspace }}/dependencies/ffmpeg-cpp/vcpkg/
         vcpkgTriplet: x64-linux
         appendedCacheKey: 'vcpkg-dependencies'
     
