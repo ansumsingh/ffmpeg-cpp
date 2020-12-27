@@ -20,7 +20,7 @@ jobs:
         submodules: true
     - name: ffmpeg-dependencies
       run: |
-        sudo apt update && apt install -y g++ \
+        sudo apt update && sudo apt install -y g++ \
           curl \
           unzip \
           tar \
