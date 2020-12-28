@@ -1,5 +1,6 @@
-# ffmpeg-cpp
 ![example workflow name](https://github.com/ansumsingh/ffmpeg-cpp/workflows/Build/badge.svg)
+
+# ffmpeg-cpp
 
 A clean C++ wrapper around the ffmpeg libraries. Makes the most commonly used functionality of FFmpeg easily available for any C++ projects with an easy-to-use interface. The full power of FFmpeg compacted in 10 lines of C++ code: if this sounds useful to you, read on!
 
