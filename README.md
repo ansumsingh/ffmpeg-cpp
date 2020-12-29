@@ -1,4 +1,4 @@
-![example workflow name](https://github.com/ansumsingh/ffmpeg-cpp/workflows/Build/badge.svg)
+![example workflow name](https://github.com/ansumsingh/ffmpeg-cpp/workflows/Linux%20Build/badge.svg)
 
 # ffmpeg-cpp
 
@@ -6,7 +6,8 @@ A clean C++ wrapper around the ffmpeg libraries. Makes the most commonly used fu
 
 # Installation
 
-## Windows
+## Build in your machine
+### Windows
 
 1. Clone the repository
 2. Update submodule for vcpkg
@@ -17,9 +18,14 @@ A clean C++ wrapper around the ffmpeg libraries. Makes the most commonly used fu
 
 This will build a `.lib` file that you can use in your own C++ projects. It will also generate an include-folder in the repo root that you can add to your include folders in your own project.
 
-## Linux
+### Linux
 
-Currently, only a Windows environment with Visual Studio is supported. This is simply because I do not have experience with cmake and Linux-projects, since the project itself is fully platform-independent. If anyone is willing to help me out with configuring cmake, please get in touch!
+1. Clone the repository
+2. Update submodule for vcpkg
+3. Run `./build-all.sh build-dependencies.sh` to build ffmpeg in your machine
+4. Run `./build-all.sh build-libraries.sh` to build this library
+	* This will create a `build` directory, and all the binaries will be inside the directory.
+	* Add `--build-examples` option while executing `build-libraries.sh` to build examples and demo, which will be inside `build\examples` folder
 
 # Usage
 
