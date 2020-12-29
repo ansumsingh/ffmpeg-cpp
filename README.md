@@ -1,4 +1,5 @@
 ![example workflow name](https://github.com/ansumsingh/ffmpeg-cpp/workflows/Linux%20Build/badge.svg)
+![example workflow name](https://github.com/ansumsingh/ffmpeg-cpp/workflows/Windows%20Build/badge.svg)
 
 # ffmpeg-cpp
 

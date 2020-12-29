@@ -1,0 +1,38 @@
+name: Windows Build
+
+on: [push]
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+  
+    - name: Build dependencies
+      uses: lukka/run-vcpkg@v6.0
+      id: runvcpkg
+      with:
+        vcpkgArguments: ffmpeg:x64-linux catch2:x64-linux 
+        vcpkgDirectory: ${{ runner.workspace }}/ffmpeg-cpp/dependencies/vcpkg/
+        vcpkgTriplet: x64-linux
+        appendedCacheKey: 'vcpkg-dependencies-windows'
+    
+    - name: Build Library
+      uses: lukka/run-cmake@v3
+      id: runcmake
+      with:
+        cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
+        useVcpkgToolchainFile: true
+        buildDirectory: '${{ github.workspace }}/build'
+        buildWithCMakeArgs: '-- -v'
+
+    - name: Run Unittests Test
+      run: |
+        cd build
+        ctest.exe -V
