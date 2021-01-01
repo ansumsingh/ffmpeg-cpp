@@ -18,7 +18,7 @@ jobs:
       uses: lukka/run-vcpkg@v6.0
       id: runvcpkg
       with:
-        vcpkgArguments: ffmpeg:x64-windows catch2:x64-windows 
+        vcpkgArguments: ffmpeg catch2:x64-windows 
         vcpkgDirectory: ${{ runner.workspace }}/ffmpeg-cpp/dependencies/vcpkg/
         vcpkgTriplet: x64-windows
         appendedCacheKey: 'vcpkg-dependencies-windows'
