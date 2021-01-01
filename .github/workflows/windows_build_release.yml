@@ -20,7 +20,7 @@ jobs:
       with:
         vcpkgArguments: ffmpeg catch2
         vcpkgDirectory: ${{ runner.workspace }}/ffmpeg-cpp/dependencies/vcpkg/
-        vcpkgTriplet: x86-windows
+        vcpkgTriplet: x64-windows
         appendedCacheKey: 'vcpkg-dependencies-windows'
     
     - name: Build Library
