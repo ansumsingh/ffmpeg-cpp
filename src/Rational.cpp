@@ -1,6 +1,12 @@
 #include "Rational.h"
 #include "ffmpeg.h"
 
+ffmpegcpp::Rational::Rational(const AVRational& other): data_{std::make_unique<AVRational>()}
+{
+    data_->num = other.num;
+    data_->den = other.den;
+};
+
 ffmpegcpp::Rational::Rational(int numerator, int denominator): data_{std::make_unique<AVRational>()}
 {
     data_->num = numerator;
@@ -19,6 +25,13 @@ ffmpegcpp::Rational& ffmpegcpp::Rational::operator=(const Rational& other)
 {
     data_->num = other.data_->num;
     data_->den = other.data_->den;
+    return *this;
+}
+
+ffmpegcpp::Rational& ffmpegcpp::Rational::operator=(const AVRational& other)
+{
+    data_->num = other.num;
+    data_->den = other.den;
     return *this;
 }
 
