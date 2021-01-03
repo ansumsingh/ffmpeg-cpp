@@ -1,6 +1,7 @@
 #include "EncodedFileSource.h"
 #include "../FFmpegException.h"
 #include "../CodecDeducer.h"
+#include "Utilities.h"
 
 using namespace std;
 
@@ -230,12 +231,10 @@ namespace ffmpegcpp
 
 
 				metaData = new StreamData();
-				metaData->timeBase.num = timeBaseCorrectedByTicksPerFrame.num;
-				metaData->timeBase.den = timeBaseCorrectedByTicksPerFrame.den;
-				metaData->frameRate.den = timeBaseCorrectedByTicksPerFrame.num;
-				metaData->frameRate.num = timeBaseCorrectedByTicksPerFrame.den;
+				metaData->frameRate = Rational{timeBaseCorrectedByTicksPerFrame.num, timeBaseCorrectedByTicksPerFrame.den};
+				metaData->timeBase = Rational{timeBaseCorrectedByTicksPerFrame.num, timeBaseCorrectedByTicksPerFrame.den};
 
-				metaData->type = codecContext->codec->type;
+				metaData->type = ffmpegcpp::toMediaType(codecContext->codec->type);
 			}
 
 

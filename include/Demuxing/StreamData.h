@@ -1,14 +1,15 @@
 #pragma once
 
-#include "../ffmpeg.h"
+#include "Rational.h"
+#include "Types.h"
 
 namespace ffmpegcpp
 {
 	struct StreamData
 	{
-		AVMediaType type;
+		MediaType type;
 
-		AVRational timeBase;
-		AVRational frameRate;
+		Rational timeBase;
+		Rational frameRate;
 	};
 }

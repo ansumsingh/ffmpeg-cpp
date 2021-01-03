@@ -1,5 +1,6 @@
 #include "Filter.h"
 #include "../FFmpegException.h"
+#include "Utilities.h"
 
 using namespace std;
 
@@ -69,7 +70,7 @@ namespace ffmpegcpp
 				FillArguments(args, sizeof(args), frame, metaData);
 
 				char bufferString[1000];
-				snprintf(bufferString, sizeof(bufferString), "%s=%s [in_%d]; ", GetBufferName(metaData->type), args, i + 1);
+				snprintf(bufferString, sizeof(bufferString), "%s=%s [in_%d]; ", GetBufferName(ffmpegcpp::toAVMediaType(metaData->type)), args, i + 1);
 				fullFilterString = bufferString + fullFilterString; // prepend the buffer string
 
 			}
@@ -121,7 +122,7 @@ namespace ffmpegcpp
 			// we configure our output meta data based on the sink's data
 			outputMetaData.timeBase = buffersink_ctx->inputs[0]->time_base;
 			outputMetaData.frameRate = buffersink_ctx->inputs[0]->frame_rate;
-			outputMetaData.type = targetMediaType;
+			outputMetaData.type = ffmpegcpp::toMediaType(targetMediaType);
 		}
 		catch (FFmpegException e)
 		{
@@ -132,31 +133,31 @@ namespace ffmpegcpp
 	void Filter::FillArguments(char* args, int argsLength, AVFrame* frame, StreamData *metaData)
 	{
 		// this is a video input stream
-		if (metaData->type == AVMEDIA_TYPE_VIDEO)
+		if (metaData->type == ffmpegcpp::MediaType::VIDEO)
 		{
 			/* buffer video src: the decoded frames from the decoder will be inserted here. */
 			AVPixelFormat pixelFormat = (AVPixelFormat)frame->format;
 			snprintf(args, argsLength,
 				"video_size=%dx%d:pix_fmt=%d:time_base=%d/%d:pixel_aspect=%d/%d:frame_rate=%d/%d",
 				frame->width, frame->height, frame->format,
-				metaData->timeBase.num, metaData->timeBase.den,
+				metaData->timeBase.numerator(), metaData->timeBase.denominator(),
 				frame->sample_aspect_ratio.num, frame->sample_aspect_ratio.den,
-				metaData->frameRate.num, metaData->frameRate.den);
+				metaData->frameRate.numerator(), metaData->frameRate.denominator());
 		}
 
 		// this is an audio input stream
-		else if (metaData->type == AVMEDIA_TYPE_AUDIO)
+		else if (metaData->type == ffmpegcpp::MediaType::AUDIO)
 		{
 			snprintf(args, argsLength,
 				"time_base=%d/%d:sample_rate=%d:sample_fmt=%s:channel_layout=0x%d",
-				metaData->timeBase.num, metaData->timeBase.den, frame->sample_rate,
+				metaData->timeBase.numerator(), metaData->timeBase.denominator(), frame->sample_rate,
 				av_get_sample_fmt_name((AVSampleFormat)frame->format), frame->channel_layout);
 		}
 
 		// not supported
 		else
 		{
-			throw new FFmpegException(std::string("Media type ") + av_get_media_type_string(metaData->type) + " is not supported by filters.");
+			throw new FFmpegException(std::string("Media type ") + av_get_media_type_string(ffmpegcpp::toAVMediaType(metaData->type)) + " is not supported by filters.");
 		}
 	}
 

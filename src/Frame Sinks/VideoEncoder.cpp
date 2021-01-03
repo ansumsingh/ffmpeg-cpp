@@ -86,7 +86,9 @@ namespace ffmpegcpp
 
 		// the frame rate is either the input frame rate, OR the default frame rate if the input frame rate
 		// is not supported, OR the explicitly chosen framerate.
-		AVRational frameRate = metaData->frameRate;
+		AVRational frameRate;
+		frameRate.num = metaData->frameRate.numerator();
+		frameRate.den = metaData->frameRate.denominator();
 		if (!closedCodec->IsFrameRateSupported(&frameRate)) frameRate = closedCodec->GetClosestSupportedFrameRate(frameRate);
 		if (finalFrameRateSet) frameRate = finalFrameRate;
 

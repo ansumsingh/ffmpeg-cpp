@@ -1,6 +1,7 @@
 #include "InputStream.h"
 #include "../CodecDeducer.h"
 #include "../FFmpegException.h"
+#include "Utilities.h"
 
 using namespace std;
 
@@ -117,7 +118,7 @@ namespace ffmpegcpp
 		metaData->timeBase = tb;
 		metaData->frameRate = fr;
 
-		metaData->type = codecContext->codec->type;
+		metaData->type = ffmpegcpp::toMediaType(codecContext->codec->type);
 
 		return metaData;
 	}

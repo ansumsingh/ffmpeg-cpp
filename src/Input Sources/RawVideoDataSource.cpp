@@ -21,11 +21,9 @@ namespace ffmpegcpp
 		this->sourcePixelFormat = sourcePixelFormat;
 
 		// set up the time base
-		metaData.timeBase.num = 1;
-		metaData.timeBase.den = framesPerSecond;
-		metaData.frameRate.num = framesPerSecond;
-		metaData.frameRate.den = 1;
-		metaData.type = AVMEDIA_TYPE_VIDEO;
+		metaData.timeBase = Rational{1, framesPerSecond};
+		metaData.frameRate = Rational{framesPerSecond, 1};
+		metaData.type = MediaType::VIDEO;
 
 		// create the frame
 		int ret;

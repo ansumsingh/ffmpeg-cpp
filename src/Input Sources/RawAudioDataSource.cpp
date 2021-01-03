@@ -77,7 +77,7 @@ namespace ffmpegcpp
 		if (metaData == nullptr)
 		{
 			metaData = new StreamData();
-			metaData->type = AVMEDIA_TYPE_AUDIO;
+			metaData->type = ffmpegcpp::MediaType::AUDIO;
 		}
 
 		// pass on to the sink
