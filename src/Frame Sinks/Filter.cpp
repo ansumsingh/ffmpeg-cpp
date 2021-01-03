@@ -14,7 +14,7 @@ namespace ffmpegcpp
 		this->filterString = filterString;
 	}
 
-	AVMediaType Filter::GetMediaType()
+	MediaType Filter::GetMediaType()
 	{
 		return targetMediaType;
 	}
@@ -122,7 +122,7 @@ namespace ffmpegcpp
 			// we configure our output meta data based on the sink's data
 			outputMetaData.timeBase = buffersink_ctx->inputs[0]->time_base;
 			outputMetaData.frameRate = buffersink_ctx->inputs[0]->frame_rate;
-			outputMetaData.type = ffmpegcpp::toMediaType(targetMediaType);
+			outputMetaData.type = targetMediaType;
 		}
 		catch (FFmpegException e)
 		{
@@ -169,12 +169,12 @@ namespace ffmpegcpp
 		else throw new FFmpegException(std::string("Media type ") + av_get_media_type_string(mediaType) + " is not supported by filters.");
 	}
 
-	const char* Filter::GetBufferSinkName(AVMediaType mediaType)
+	const char* Filter::GetBufferSinkName(MediaType mediaType)
 	{
 		// this is a video input stream
-		if (mediaType == AVMEDIA_TYPE_VIDEO) return "buffersink";
-		else if (mediaType == AVMEDIA_TYPE_AUDIO) return "abuffersink";
-		else throw new FFmpegException(std::string("Media type ") + av_get_media_type_string(mediaType) + " is not supported by filters.");
+		if (mediaType == MediaType::VIDEO) return "buffersink";
+		else if (mediaType == MediaType::AUDIO) return "abuffersink";
+		else throw new FFmpegException(std::string("Media type ") + av_get_media_type_string(ffmpegcpp::toAVMediaType(mediaType)) + " is not supported by filters.");
 	}
 
 	void Filter::DrainInputQueues()

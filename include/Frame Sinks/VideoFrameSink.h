@@ -8,9 +8,9 @@ namespace ffmpegcpp
 	{
 	public:
 
-		virtual AVMediaType GetMediaType()
+		virtual MediaType GetMediaType()
 		{
-			return AVMEDIA_TYPE_VIDEO;
+			return MediaType::VIDEO;
 		}
 
 		virtual ~VideoFrameSink() {}

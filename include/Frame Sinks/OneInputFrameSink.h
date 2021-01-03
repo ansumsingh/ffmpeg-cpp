@@ -12,10 +12,10 @@ namespace ffmpegcpp
 	{
 	public:
 
-		OneInputFrameSink(FrameWriter* writer, AVMediaType mediaType);
+		OneInputFrameSink(FrameWriter* writer, MediaType mediaType);
 		~OneInputFrameSink();
 
-		virtual AVMediaType GetMediaType();
+		virtual MediaType GetMediaType();
 
 		FrameSinkStream* CreateStream();
 
@@ -28,7 +28,7 @@ namespace ffmpegcpp
 
 		FrameSinkStream* stream = nullptr;
 
-		AVMediaType mediaType;
+		MediaType mediaType;
 	};
 }
 

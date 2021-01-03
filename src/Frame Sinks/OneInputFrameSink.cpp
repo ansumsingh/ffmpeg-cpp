@@ -6,7 +6,7 @@ using namespace std;
 namespace ffmpegcpp
 {
 
-	OneInputFrameSink::OneInputFrameSink(FrameWriter* writer, AVMediaType mediaType)
+	OneInputFrameSink::OneInputFrameSink(FrameWriter* writer, MediaType mediaType)
 	{
 		this->writer = writer;
 		this->mediaType = mediaType;
@@ -28,7 +28,7 @@ namespace ffmpegcpp
 		if (stream != nullptr) delete stream;
 	}
 
-	AVMediaType OneInputFrameSink::GetMediaType()
+	MediaType OneInputFrameSink::GetMediaType()
 	{
 		return mediaType;
 	}

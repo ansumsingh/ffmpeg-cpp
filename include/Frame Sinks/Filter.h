@@ -23,7 +23,7 @@ namespace ffmpegcpp
 
 		bool IsPrimed();
 
-		virtual AVMediaType GetMediaType();
+		virtual MediaType GetMediaType();
 
 	private:
 
@@ -35,12 +35,12 @@ namespace ffmpegcpp
 		void FillArguments(char* args, int argsLength, AVFrame* frame, StreamData* metaData);
 
 		const char* GetBufferName(AVMediaType mediaType);
-		const char* GetBufferSinkName(AVMediaType mediaType);
+		const char* GetBufferSinkName(MediaType mediaType);
 
 		std::vector<VideoFilterInput*> inputs;
 		std::vector<AVFilterContext*> bufferSources;
 
-		AVMediaType targetMediaType;
+		MediaType targetMediaType;
 		FrameSinkStream* target;
 
 		const char* filterString;

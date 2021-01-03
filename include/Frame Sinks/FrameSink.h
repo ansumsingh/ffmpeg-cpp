@@ -11,7 +11,7 @@ namespace ffmpegcpp
 
 		virtual FrameSinkStream* CreateStream() = 0;
 
-		virtual AVMediaType GetMediaType() = 0;
+		virtual MediaType GetMediaType() = 0;
 
 		virtual ~FrameSink() {}
 	};
