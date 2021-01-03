@@ -17,3 +17,21 @@ ffmpegcpp::MediaType ffmpegcpp::toMediaType(AVMediaType type){
             return MediaType::UNKNOWN;
     }
 }
+
+AVMediaType ffmpegcpp::toAVMediaType(MediaType type){
+    switch(type){
+        case MediaType::AUDIO:
+            return AVMediaType::AVMEDIA_TYPE_AUDIO;
+        case MediaType::VIDEO:
+            return AVMediaType::AVMEDIA_TYPE_VIDEO;
+        case MediaType::SUBTITLE:
+            return AVMediaType::AVMEDIA_TYPE_SUBTITLE;
+        case MediaType::DATA:
+            return AVMediaType::AVMEDIA_TYPE_DATA;
+        case MediaType::NB:
+            return AVMediaType::AVMEDIA_TYPE_NB;
+        case MediaType::UNKNOWN:
+        default:
+            return AVMediaType::AVMEDIA_TYPE_UNKNOWN;
+    }
+}

@@ -5,4 +5,5 @@
 namespace ffmpegcpp{
     // Convert to the MediaType from the internal AVMediaType
     MediaType toMediaType(AVMediaType type);
+    AVMediaType toAVMediaType(MediaType type);
 }// ffmpegcpp
