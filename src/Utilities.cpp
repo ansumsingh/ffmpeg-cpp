@@ -18,6 +18,24 @@ ffmpegcpp::MediaType ffmpegcpp::toMediaType(AVMediaType type){
     }
 }
 
+std::string ffmpegcpp::toString(MediaType type){
+    switch(type){
+        case MediaType::AUDIO:
+            return "AUDIO";
+        case MediaType::VIDEO:
+            return "VIDEO";
+        case MediaType::SUBTITLE:
+            return "SUBTITLE";
+        case MediaType::DATA:
+            return "DATA";
+        case MediaType::NB:
+            return "NB";
+        case MediaType::UNKNOWN:
+        default:
+            return "UNKNOWN";
+    }
+}
+
 AVMediaType ffmpegcpp::toAVMediaType(MediaType type){
     switch(type){
         case MediaType::AUDIO:

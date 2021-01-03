@@ -17,6 +17,20 @@ namespace ffmpegcpp::unittests{
         REQUIRE(ffmpegcpp::toMediaType(static_cast<AVMediaType>(100)) == MediaType::UNKNOWN);
     }
 
+    TEST_CASE("toString()"){
+        auto [input, expected] = GENERATE(
+            std::pair{MediaType::UNKNOWN, "UNKNOWN"},
+            std::pair{MediaType::DATA, "DATA"},
+            std::pair{MediaType::AUDIO, "AUDIO"},
+            std::pair{MediaType::VIDEO, "VIDEO"},
+            std::pair{MediaType::SUBTITLE, "SUBTITLE"},
+            std::pair{MediaType::NB, "NB"}
+            );
+        
+        REQUIRE(ffmpegcpp::toString(input) == expected);
+        REQUIRE(ffmpegcpp::toString(static_cast<MediaType>(100)) == "UNKNOWN");
+    }
+
     TEST_CASE("toAVMediaType()"){
         auto [expected, input] = GENERATE(
             std::pair{AVMediaType::AVMEDIA_TYPE_UNKNOWN, MediaType::UNKNOWN},
