@@ -70,7 +70,7 @@ namespace ffmpegcpp
 				FillArguments(args, sizeof(args), frame, metaData);
 
 				char bufferString[1000];
-				snprintf(bufferString, sizeof(bufferString), "%s=%s [in_%d]; ", GetBufferName(ffmpegcpp::toAVMediaType(metaData->type)), args, i + 1);
+				snprintf(bufferString, sizeof(bufferString), "%s=%s [in_%d]; ", GetBufferName(metaData->type), args, i + 1);
 				fullFilterString = bufferString + fullFilterString; // prepend the buffer string
 
 			}
@@ -157,16 +157,16 @@ namespace ffmpegcpp
 		// not supported
 		else
 		{
-			throw new FFmpegException(std::string("Media type ") + av_get_media_type_string(ffmpegcpp::toAVMediaType(metaData->type)) + " is not supported by filters.");
+			throw new FFmpegException(std::string("Media type ") + ffmpegcpp::toString(metaData->type) + " is not supported by filters.");
 		}
 	}
 
-	const char* Filter::GetBufferName(AVMediaType mediaType)
+	const char* Filter::GetBufferName(MediaType mediaType)
 	{
 		// this is a video input stream
-		if (mediaType == AVMEDIA_TYPE_VIDEO) return "buffer";
-		else if (mediaType == AVMEDIA_TYPE_AUDIO) return "abuffer";
-		else throw new FFmpegException(std::string("Media type ") + av_get_media_type_string(mediaType) + " is not supported by filters.");
+		if (mediaType == MediaType::VIDEO) return "buffer";
+		else if (mediaType == MediaType::AUDIO) return "abuffer";
+		else throw new FFmpegException(std::string("Media type ") + ffmpegcpp::toString(mediaType) + " is not supported by filters.");
 	}
 
 	const char* Filter::GetBufferSinkName(MediaType mediaType)
@@ -174,7 +174,7 @@ namespace ffmpegcpp
 		// this is a video input stream
 		if (mediaType == MediaType::VIDEO) return "buffersink";
 		else if (mediaType == MediaType::AUDIO) return "abuffersink";
-		else throw new FFmpegException(std::string("Media type ") + av_get_media_type_string(ffmpegcpp::toAVMediaType(mediaType)) + " is not supported by filters.");
+		else throw new FFmpegException(std::string("Media type ") + ffmpegcpp::toString(mediaType) + " is not supported by filters.");
 	}
 
 	void Filter::DrainInputQueues()

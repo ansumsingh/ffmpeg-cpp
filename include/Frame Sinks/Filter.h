@@ -34,7 +34,7 @@ namespace ffmpegcpp
 		void PollFilterGraphForFrames();
 		void FillArguments(char* args, int argsLength, AVFrame* frame, StreamData* metaData);
 
-		const char* GetBufferName(AVMediaType mediaType);
+		const char* GetBufferName(MediaType mediaType);
 		const char* GetBufferSinkName(MediaType mediaType);
 
 		std::vector<VideoFilterInput*> inputs;
