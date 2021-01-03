@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Rational.h"
 #include "ffmpeg.h"
 
 namespace ffmpegcpp
@@ -8,16 +9,16 @@ namespace ffmpegcpp
 	{
 	public:
 
-		FrameContainer(AVFrame* frame, AVRational* timeBase);
+		FrameContainer(AVFrame* frame, const Rational& timeBase);
 		~FrameContainer();
 
 		AVFrame* GetFrame();
-		AVRational* GetTimeBase();
+		Rational GetTimeBase();
 
 	private:
 
 		AVFrame* frame;
-		AVRational *timeBase;
+		Rational timeBase_;
 	};
 
 }

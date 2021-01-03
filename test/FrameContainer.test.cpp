@@ -19,45 +19,43 @@ namespace ffmpegcpp::unittests {
 
 TEST_CASE("FrameContainer()", "[!mayfail]")
 {
-  REQUIRE_THROWS_AS(ffmpegcpp::FrameContainer(new AVFrame{}, new AVRational{}), ffmpegcpp::FFmpegException);
+  REQUIRE_THROWS_AS(ffmpegcpp::FrameContainer(new AVFrame{}, Rational{}), ffmpegcpp::FFmpegException);
 
   SECTION("Construct without throw")
   {	  
 	  auto frame = dummyAvFrame();
-	  REQUIRE_NOTHROW(ffmpegcpp::FrameContainer(frame, new AVRational{}));
+	  REQUIRE_NOTHROW(ffmpegcpp::FrameContainer(frame, Rational{}));
   }
 
   SECTION("~FrameContainer()")
   {	  
 	  AVFrame* frame;
 	  {
-		  auto frameContainer = ffmpegcpp::FrameContainer{dummyAvFrame(), new AVRational{}};
+		  auto frameContainer = ffmpegcpp::FrameContainer{dummyAvFrame(), Rational{}};
 		  frame = frameContainer.GetFrame();
 
 		  REQUIRE(frame);
 	  	  REQUIRE(frame->height == ffmpegcpp::unittests::commonHeight);
 	  	  REQUIRE(frame->width == ffmpegcpp::unittests::commonWidth);
 	  }
-	  REQUIRE(frame->height == 0);
-	  REQUIRE(frame->width == 0);
   }
 }
 
 TEST_CASE("~FrameContainer()")
 {
-  REQUIRE_THROWS_AS(ffmpegcpp::FrameContainer(new AVFrame{}, new AVRational{}), ffmpegcpp::FFmpegException);
+  REQUIRE_THROWS_AS(ffmpegcpp::FrameContainer(new AVFrame{}, Rational{}), ffmpegcpp::FFmpegException);
 
   SECTION("Construct without throw")
   {	  
 	  auto frame = dummyAvFrame();
-	  REQUIRE_NOTHROW(ffmpegcpp::FrameContainer(frame, new AVRational{}));
+	  REQUIRE_NOTHROW(ffmpegcpp::FrameContainer(frame, Rational{}));
   }
 }
 
 TEST_CASE("FrameContainer::getFrame()")
 {
 	auto frame = dummyAvFrame();
-	auto frameContainer = ffmpegcpp::FrameContainer{ frame, new AVRational{} };
+	auto frameContainer = ffmpegcpp::FrameContainer{ frame, Rational{} };
 	auto avFrame = frameContainer.GetFrame();
 	
 	REQUIRE(avFrame->width == ffmpegcpp::unittests::commonWidth);
@@ -67,12 +65,14 @@ TEST_CASE("FrameContainer::getFrame()")
 
 TEST_CASE("FrameContainer::getTimeBase()")
 {
+	using namespace ffmpegcpp::unittests;
+
 	auto frame = dummyAvFrame();
-	auto timeBase = AVRational{1, 1};
-	auto frameContainer = ffmpegcpp::FrameContainer{ frame, &timeBase };
+	auto timeBase = Rational{commonNumerator, commonDenominator};
+	auto frameContainer = ffmpegcpp::FrameContainer{frame, timeBase};
 	
-	REQUIRE(frameContainer.GetTimeBase()->num == 1);
-	REQUIRE(frameContainer.GetTimeBase()->den == 1);
+	REQUIRE(frameContainer.GetTimeBase().numerator() == commonNumerator);
+	REQUIRE(frameContainer.GetTimeBase().denominator() == commonDenominator);
 }
 
 }//ffmpegcpp::unittests

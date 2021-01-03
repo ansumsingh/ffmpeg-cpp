@@ -5,13 +5,13 @@ using namespace std;
 
 namespace ffmpegcpp
 {
-	FrameContainer::FrameContainer(AVFrame* frame, AVRational* timeBase)
+	FrameContainer::FrameContainer(AVFrame* frame, const Rational& timeBase)
 	{
 		AVFrame *tmp = av_frame_clone(frame);
 		if (!tmp) { throw FFmpegException("Failed to clone frame"); };
 		av_frame_unref(frame);
 		this->frame = tmp;
-		this->timeBase = timeBase;
+		timeBase_ = timeBase;
 	}
 
 	FrameContainer::~FrameContainer()
@@ -24,8 +24,8 @@ namespace ffmpegcpp
 		return frame;
 	}
 
-	AVRational* FrameContainer::GetTimeBase()
+	Rational FrameContainer::GetTimeBase()
 	{
-		return timeBase;
+		return timeBase_;
 	}
 }
