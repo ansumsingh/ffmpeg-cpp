@@ -28,8 +28,8 @@ int main()
 				<< ", pixel format " << stream.formatName
 				<< ", resolution " << stream.width << "x" << stream.height
 				<< ", bit rate " << stream.bitRate << "kb/s"
-				<< ", fps " << ((float)stream.frameRate.num / (float)stream.frameRate.den)
-				<< ", time base " << stream.timeBase.num  << "/" << stream.timeBase.den
+				<< ", fps " << stream.frameRate.toDouble()
+				<< ", time base " << stream.timeBase.numerator()  << "/" << stream.timeBase.denominator()
 				<< ", " << demuxer->GetFrameCount(stream.id) << " frames"
 				<< endl;
 		}

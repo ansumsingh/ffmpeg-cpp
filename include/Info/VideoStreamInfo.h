@@ -7,8 +7,8 @@ namespace ffmpegcpp
 	struct VideoStreamInfo
 	{
 		int id;
-		AVRational frameRate;
-		AVRational timeBase;
+		Rational frameRate;
+		Rational timeBase;
 		const AVCodec* codec;
 		float bitRate;
 
