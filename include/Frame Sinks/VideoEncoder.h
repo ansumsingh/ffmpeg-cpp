@@ -15,8 +15,8 @@ namespace ffmpegcpp
 	public:
 		VideoEncoder(VideoCodec* codec, Muxer* muxer);
 		VideoEncoder(VideoCodec* codec, Muxer* muxer, AVPixelFormat format);
-		VideoEncoder(VideoCodec* codec, Muxer* muxer, AVRational frameRate);
-		VideoEncoder(VideoCodec* codec, Muxer* muxer, AVRational frameRate, AVPixelFormat format);
+		VideoEncoder(VideoCodec* codec, Muxer* muxer, const Rational& frameRate);
+		VideoEncoder(VideoCodec* codec, Muxer* muxer, const Rational& frameRate, AVPixelFormat format);
 		virtual ~VideoEncoder();
 
 		FrameSinkStream* CreateStream();
@@ -46,7 +46,7 @@ namespace ffmpegcpp
 
 		AVPixelFormat finalPixelFormat = AV_PIX_FMT_NONE;
 
-		AVRational finalFrameRate;
+		Rational finalFrameRate;
 		bool finalFrameRateSet = false;
 	};
 }

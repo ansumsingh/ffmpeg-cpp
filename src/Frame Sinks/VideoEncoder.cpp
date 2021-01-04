@@ -26,14 +26,14 @@ namespace ffmpegcpp
 		finalPixelFormat = format;
 	}
 
-	VideoEncoder::VideoEncoder(VideoCodec* codec, Muxer* muxer, AVRational frameRate)
+	VideoEncoder::VideoEncoder(VideoCodec* codec, Muxer* muxer, const Rational& frameRate)
 		: VideoEncoder(codec, muxer)
 	{
 		finalFrameRate = frameRate;
 		finalFrameRateSet = true;
 	}
 
-	VideoEncoder::VideoEncoder(VideoCodec* codec, Muxer* muxer, AVRational frameRate, AVPixelFormat format)
+	VideoEncoder::VideoEncoder(VideoCodec* codec, Muxer* muxer, const Rational& frameRate, AVPixelFormat format)
 		: VideoEncoder(codec, muxer)
 	{
 		finalPixelFormat = format;
