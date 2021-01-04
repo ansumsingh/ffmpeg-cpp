@@ -4,6 +4,7 @@
 #include "../Codecs/Codec.h"
 #include "OutputStream.h"
 #include "Muxer.h"
+#include "Rational.h"
 
 namespace ffmpegcpp
 {
@@ -31,6 +32,6 @@ namespace ffmpegcpp
 
 		bool initialized = false;
 
-		AVRational codecTimeBase;
+		Rational codecTimeBase;
 	};
 }

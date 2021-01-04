@@ -74,8 +74,12 @@ namespace ffmpegcpp
 	void AudioOutputStream::PreparePacketForMuxer(AVPacket* pkt)
 	{
 		/* rescale output packet timestamp values from codec to stream timebase */
-		AVRational* time_base = &codecTimeBase;
-		av_packet_rescale_ts(pkt, *time_base, stream->time_base);
+		AVRational time_base;
+		// Currently, No inverse transform has been implemented in Rational.
+		time_base.num = codecTimeBase.numerator();
+		time_base.num = codecTimeBase.denominator();
+		
+		av_packet_rescale_ts(pkt, time_base, stream->time_base);
 		pkt->stream_index = stream->index;
 
 		// We NEED to fill in the duration here, otherwise the frame rate is calculated wrong in the end for certain codecs/containers (ie h264/mp4).
