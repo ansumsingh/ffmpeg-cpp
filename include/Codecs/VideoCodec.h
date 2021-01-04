@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Rational.h"
 #include "Codec.h"
 #include "../OpenCodec.h"
 
@@ -14,16 +15,16 @@ namespace ffmpegcpp
 		VideoCodec(AVCodecID codecId);
 		virtual ~VideoCodec();
 
-		OpenCodec* Open(int width, int height, AVRational* frameRate, AVPixelFormat format);
+		OpenCodec* Open(int width, int height, const Rational& frameRate, AVPixelFormat format);
 
 		// This maps to the qscale parameter so should be in the range [0,31].
 		void SetQualityScale(int qscale);
 
 		bool IsPixelFormatSupported(AVPixelFormat format);
-		bool IsFrameRateSupported(AVRational* frameRate);
+		bool IsFrameRateSupported(const Rational& frameRate);
 
 		AVPixelFormat GetDefaultPixelFormat();
-		AVRational GetClosestSupportedFrameRate(AVRational frameRate);
+		Rational GetClosestSupportedFrameRate(const Rational& frameRate);
 
 	};
 

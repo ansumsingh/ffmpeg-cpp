@@ -39,24 +39,24 @@ namespace ffmpegcpp
 		return false;
 	}
 
-	bool VideoCodec::IsFrameRateSupported(AVRational* frameRate)
+	bool VideoCodec::IsFrameRateSupported(const Rational& frameRate)
 	{
 		if (!codecContext->codec->supported_framerates) return true; // all frame rates are fair game
 		const AVRational *p = codecContext->codec->supported_framerates;
 		while (p->num)
 		{
-			if (av_cmp_q(*p, *frameRate) == 0) return true;
+			if (Rational{*p} == frameRate) return true;
 			p++;
 		}
 		return false;
 	}
 
-	OpenCodec* VideoCodec::Open(int width, int height, AVRational* frameRate, AVPixelFormat format)
+	OpenCodec* VideoCodec::Open(int width, int height, const Rational& frameRate, AVPixelFormat format)
 	{
 
 		// sanity checks
 		if (!IsPixelFormatSupported(format)) throw FFmpegException("Pixel format " + string(av_get_pix_fmt_name(format)) + " is not supported by codec " + codecContext->codec->name);
-		if (!IsFrameRateSupported(frameRate)) throw FFmpegException("Frame rate " + to_string(frameRate->num) + "/" + to_string(frameRate->den) + " is not supported by codec " + codecContext->codec->name);
+		if (!IsFrameRateSupported(frameRate)) throw FFmpegException("Frame rate " + to_string(frameRate.numerator()) + "/" + to_string(frameRate.denominator()) + " is not supported by codec " + codecContext->codec->name);
 
 		// if the codec is not an audio codec, we are doing it wrong!
 		if (codecContext->codec->type != AVMEDIA_TYPE_VIDEO) throw FFmpegException("A video output stream must be initialized with a video codec");
@@ -68,12 +68,12 @@ namespace ffmpegcpp
 
 		// FPS
 		AVRational time_base;
-		time_base.num = frameRate->den;
-		time_base.den = frameRate->num;
+		time_base.num = frameRate.denominator();
+		time_base.den = frameRate.numerator();
 		codecContext->time_base = time_base;
 		AVRational framerate;
-		framerate.num = frameRate->num;
-		framerate.den = frameRate->den;
+		framerate.num = frameRate.numerator();
+		framerate.den = frameRate.denominator();
 		codecContext->framerate = framerate;
 
 		return Codec::Open();
@@ -86,7 +86,7 @@ namespace ffmpegcpp
 		return *p;
 	}
 
-	AVRational VideoCodec::GetClosestSupportedFrameRate(AVRational originalFrameRate)
+	Rational VideoCodec::GetClosestSupportedFrameRate(const Rational& originalFrameRate)
 	{
 		if (!codecContext->codec->supported_framerates)
 		{
@@ -99,7 +99,7 @@ namespace ffmpegcpp
 		bestFrameRate.num = 0;
 		bestFrameRate.den = 1;
 		double bestDiff = std::numeric_limits<double>::max();
-		double fVal = av_q2d(originalFrameRate);
+		double fVal = originalFrameRate.toDouble();
 		while (p->num)
 		{
 			double pVal = av_q2d(*p);

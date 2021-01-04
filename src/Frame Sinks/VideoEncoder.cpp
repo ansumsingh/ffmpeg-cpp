@@ -86,14 +86,12 @@ namespace ffmpegcpp
 
 		// the frame rate is either the input frame rate, OR the default frame rate if the input frame rate
 		// is not supported, OR the explicitly chosen framerate.
-		AVRational frameRate;
-		frameRate.num = metaData->frameRate.numerator();
-		frameRate.den = metaData->frameRate.denominator();
-		if (!closedCodec->IsFrameRateSupported(&frameRate)) frameRate = closedCodec->GetClosestSupportedFrameRate(frameRate);
+		auto frameRate = metaData->frameRate;
+		if (!closedCodec->IsFrameRateSupported(frameRate)) frameRate = closedCodec->GetClosestSupportedFrameRate(frameRate);
 		if (finalFrameRateSet) frameRate = finalFrameRate;
 
 		// open the codec
-		codec = closedCodec->Open(width, height, &frameRate, format);
+		codec = closedCodec->Open(width, height, frameRate, format);
 
 		// allocate the packet we'll be using
 		pkt = av_packet_alloc();
