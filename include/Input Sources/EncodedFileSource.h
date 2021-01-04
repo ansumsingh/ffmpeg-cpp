@@ -45,7 +45,7 @@ namespace ffmpegcpp
 
 		void Decode(AVPacket *packet, AVFrame* targetFrame);
 
-		AVRational timeBaseCorrectedByTicksPerFrame;
+		Rational timeBaseCorrectedByTicksPerFrame;
 
 		StreamData* metaData = nullptr;
 	};
