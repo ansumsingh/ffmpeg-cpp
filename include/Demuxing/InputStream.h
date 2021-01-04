@@ -40,7 +40,7 @@ namespace ffmpegcpp
 
 	private:
 
-		AVRational timeBaseCorrectedByTicksPerFrame;
+		Rational timeBaseCorrectedByTicksPerFrame;
 
 		FrameSinkStream* output = nullptr;
 

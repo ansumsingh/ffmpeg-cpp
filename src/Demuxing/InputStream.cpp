@@ -48,9 +48,8 @@ namespace ffmpegcpp
 
 		// calculate the "correct" time_base
 		// TODO this is definitely an ugly hack but right now I have no idea on how to fix this properly.
-		timeBaseCorrectedByTicksPerFrame.num = codecContext->time_base.num;
-		timeBaseCorrectedByTicksPerFrame.den = codecContext->time_base.den;
-		timeBaseCorrectedByTicksPerFrame.num *= codecContext->ticks_per_frame;
+		timeBaseCorrectedByTicksPerFrame = codecContext->time_base;
+		timeBaseCorrectedByTicksPerFrame *= Rational{codecContext->ticks_per_frame, 1};
 
 		// assign the frame that will be read from the container
 		frame = av_frame_alloc();
