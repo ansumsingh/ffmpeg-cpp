@@ -3,14 +3,13 @@
 
 #include <ffmpegcpp.h>
 
-using namespace std;
 using namespace ffmpegcpp;
 
 int main()
 {
 	// This example will print info about a video.
-	/*try
-	{*/
+	try
+	{
 
 		// Load a video from a container and read its info.
 		const char* fileName = "samples/big_buck_bunny.mp4";
@@ -18,12 +17,12 @@ int main()
 		ContainerInfo info = demuxer->GetInfo();
 
 		// Print the data similar to ffmpeg.exe.
-		cout << "Input " << info.format->name << " from '" << fileName << "'" << endl;
-		cout << "Video streams:" << endl;
+		std::cout << "Input " << info.format->name << " from '" << fileName << "'" << std::endl;
+		std::cout << "Video streams:" << std::endl;
 		for (int i = 0; i < info.videoStreams.size(); ++i)
 		{
 			VideoStreamInfo stream = info.videoStreams[i];
-			cout << "Stream #" << (i + 1)
+			std::cout << "Stream #" << (i + 1)
 				<< ": codec " << stream.codec->name
 				<< ", pixel format " << stream.formatName
 				<< ", resolution " << stream.width << "x" << stream.height
@@ -31,21 +30,18 @@ int main()
 				<< ", fps " << stream.frameRate.toDouble()
 				<< ", time base " << stream.timeBase.numerator()  << "/" << stream.timeBase.denominator()
 				<< ", " << demuxer->GetFrameCount(stream.id) << " frames"
-				<< endl;
+				<< std::endl;
 		}
 
-
-
-	/*}
-	catch (FFmpegException e)
+	std::cout << "Encoding complete!" << std::endl;
+	std::cout << "Press any key to continue..." << std::endl;
+	}
+	catch (std::exception& e)
 	{
-		cerr << "Exception caught!" << endl;
-		cerr << e.what() << endl;
-		throw e;
-	}*/
+		std::cout << "Exception caught!" << std::endl;
+		std::cout << e.what() << std::endl;
+	}
 
-	cout << "Encoding complete!" << endl;
-	cout << "Press any key to continue..." << endl;
 
-	getchar();
+	return 0;
 }
