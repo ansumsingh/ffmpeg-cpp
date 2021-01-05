@@ -15,9 +15,9 @@ namespace ffmpegcpp
 
 		FFmpegException(const std::string& error, int returnValue);
 
-		virtual char const* what()
+		virtual char const* what() const
 		{
-			return errorInfo.data();
+			return errorInfo.c_str();
 		}
 
 

@@ -8,7 +8,7 @@ namespace ffmpegcpp
 	{
 	}
 
-	FFmpegException::FFmpegException(const string& error, int returnValue)
+	FFmpegException::FFmpegException(const string& error, int returnValue): errorInfo{error}
 	{
 	}
 }
